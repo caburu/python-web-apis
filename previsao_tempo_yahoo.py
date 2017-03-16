@@ -3,11 +3,19 @@ Programa para demonstrar a utilização do Python para obter dados
 disponíveis na Web.
 
 O usuário digita uma localidade a ser buscado no Yahoo Weather e, caso 
-seja encontrado, são exibidos dados deo tempo daquele local
+seja encontrado, são exibidos dados deo tempo daquele local.
 
-Obs:
+Descomente a chamada da função exibir_dados_formatados para ver todos
+os dados que são retornados. Assim você poderá alterar o programa para
+exibir diversas outras informações, como umidade, pressão, velocidade do
+vento, etc.
 
-Fonte:
+Obs: a licença do Yahoo diz que aplicações que acessam a API devem
+exibir a logo da Yahoo com link para o site. Como o programa é em
+linha de comando, para seguir a licença, está sendo mostrada a
+frase "Powered by Yahoo!" e o link.
+
+Referência:
 https://developer.yahoo.com/weather/
 
 @author: Julio Cesar Alves (DCC/UFLA)
@@ -16,7 +24,7 @@ https://developer.yahoo.com/weather/
 
 import urllib.parse, urllib.request, json
 
-def montar_endereco(local):
+def montar_endereco(local):	
 	endereco_base = "https://query.yahooapis.com/v1/public/yql?"
 	consulta_yql = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='%s') and u='c'" % (local)
 	consulta = {"q":consulta_yql, "format":"json"}
@@ -75,9 +83,3 @@ while pesquisa != "":
 	#exibir_dados_formatados(dados)
 	exibir_dados(dados)			
 	pesquisa = input("\nDigite a cidade: ")
-
-
-
-
-
-
